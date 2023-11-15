@@ -45,9 +45,13 @@ class Membre implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'membre', targetEntity: Commande::class)]
     private Collection $commandes;
 
+    #[ORM\Column(type: 'json')]
+    private array $roles = [];
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
+        $this->roles = ['ROLE_USER']; // or any default role you want to assign
     }
 
     public function getId(): ?int
@@ -197,7 +201,7 @@ class Membre implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function eraseCredentials()
     {
-        return ;
+        return null;
     }
 
     public function getUserIdentifier(): string
