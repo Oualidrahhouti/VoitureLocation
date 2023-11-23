@@ -15,6 +15,9 @@
                 {{ vehicule.modele }}
                 <img src="{{asset('images/'~vehicule.photo) }}" width="150">
                 {{ vehicule.prixJournalier }}
+                <form method="post" action={{ path('app_remove_vehicule',{'id':vehicule.id}) }}>
+                    <button type="submit">Supprimer</button>
+                </form>
             </div>
 
 

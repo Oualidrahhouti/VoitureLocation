@@ -68,17 +68,15 @@ class AdminController extends AbstractController
             'vehiculeForm'=> $vehiculeForm
         ]);
     }
-    #[Route('/vehicule/{id}', name: 'app_remove_vehicule',methods: ['DELETE'])]
-    public function SupprimerVehicule(VehiculeRepository $vehiculeRepository,EntityManagerInterface $entityManager, $id): Response
+    #[Route('/vehicule/remove/{id}', name: 'app_remove_vehicule')]
+    public function SupprimerVehicule(VehiculeRepository $vehiculeRepository,EntityManagerInterface $entityManager, $id=0): Response
     {
         $vehicule=$vehiculeRepository->find($id);
         if($vehicule) {
             $entityManager->remove($vehicule);
             $entityManager->flush();
-        }        $vehiculeForm=$this->createForm(VehiculeType::class,$vehicule);
-        return $this->render('admin/modifier_vehicule.html.twig', [
-            'vehiculeForm'=> $vehiculeForm
-        ]);
+        }
+        return $this->redirectToRoute("app_vehicules");
     }
     #[Route('/vehicules', name: 'app_vehicules',methods: ['GET','POST'])]
     public function vehicules(VehiculeRepository $vehiculeRepository): Response
