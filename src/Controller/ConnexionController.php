@@ -55,11 +55,6 @@ class ConnexionController extends AbstractController
         // controller can be blank: it will never be called!
         throw new \Exception('Don\'t forget to activate logout in security.yaml');
     }
-    #[Route('/', name: 'app_home',methods: ['GET','POST'])]
-    public function home(): Response
-    {
 
-        return $this->render('base.html.twig');
-    }
 
 }
