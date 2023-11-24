@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Vehicule;
+use App\Form\MembreType;
 use App\Form\VehiculeType;
 use App\Repository\CommandeRepository;
+use App\Repository\MembreRepository;
 use App\Repository\VehiculeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -89,4 +91,28 @@ class AdminController extends AbstractController
             'vehicules'=> $vehicules
         ]);
     }
+    #[Route('/membres', name: 'app_membres',methods: ['GET','POST'])]
+    public function membres(MembreRepository $membreRepository): Response
+    {
+        $clients=$membreRepository->findAll();
+        $clients=array_filter($clients,function ($crt){
+            return !in_array('ROLE_ADMIN',$crt->getRoles());
+        });
+        return $this->render('admin/clients.html.twig', [
+            "clients"=>$clients
+        ]);
+    }
+    #[Route('/membres/delete/{id}', name: 'app_remove_membres',methods: ['POST'])]
+    public function SupprimerMembre(MembreRepository $membreRepository,
+                                    EntityManagerInterface $entityManager,$id): Response
+    {
+        $client=$membreRepository->find($id);
+        if($client)
+        {
+            $entityManager->remove($client);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute("app_membres");
+    }
+
 }
