@@ -52,7 +52,8 @@ class VehiculeRepository extends ServiceEntityRepository
             ->leftJoin('v.commandes', 'c')
             ->andWhere('c.date_heure_depart >= :endDateTime OR c.date_heure_fin <= :startDateTime OR c.id IS NULL')
             ->setParameter('startDateTime', $startDateTime)
-            ->setParameter('endDateTime', $endDateTime);
+            ->setParameter('endDateTime', $endDateTime)
+            ->distinct();
 
         $result=$query->getQuery()->getArrayResult();
         return $result;
