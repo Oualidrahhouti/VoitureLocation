@@ -12,5 +12,14 @@
 
     Hello {{ user.pseudo }}
     {{ form(profilForm) }}
+    {% for commande in commandes %}
+        <div>
+            {{ commande.id }}
+            {{ commande.vehicule.modele }}
+            {{ commande.dateHeureDepart | date('d/m/y') }}
+            {{ commande.dateHeureFin | date('d/m/y') }}
+            {{ commande.prixTotal }}
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}
