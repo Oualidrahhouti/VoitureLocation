@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Vehicule;
 use App\Form\VehiculeType;
+use App\Repository\CommandeRepository;
 use App\Repository\VehiculeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,10 +17,12 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function index(): Response
+    public function index(CommandeRepository $commandeRepository): Response
     {
+        $commandes=$commandeRepository->findAll();
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
+            'commandes'=> $commandes
         ]);
     }
 

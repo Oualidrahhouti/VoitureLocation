@@ -10,5 +10,17 @@
 
 <div class="example-wrapper">
     {{ app.user.email }}
+    {% for commande in commandes %}
+        <div>
+            {{ commande.id }}
+            {{ commande.vehicule.modele }}
+            {{ commande.membre.email }}
+            {{ commande.dateHeureDepart | date('d/m/y') }}
+            {{ commande.dateHeureFin | date('d/m/y') }}
+            {{ commande.prixTotal }}
+
+
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}
