@@ -11,5 +11,19 @@
 <div class="example-wrapper">
 
     {{ form(searchForm) }}
+    {% for car in availableCars %}
+        <div>
+            {{ car.titre }}
+            {{ car.modele }}
+            {{ car.marque }}
+            <img src="{{ asset('images/'~car.photo) }}" width="150">
+            {{ car.prix_journalier }}
+            <form action="{{ path('app_reserver',{'id':car.id}) }}" method="post">
+                <input type="hidden" value="{{ dateDepart |date("d/m/Y") }}" name="dateDepart">
+                <input type="hidden" value="{{ dateFin |date("d/m/Y")}}" name="dateFin">
+                <input type="submit" value="reserver">
+            </form>
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}

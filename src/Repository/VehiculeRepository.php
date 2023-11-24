@@ -45,4 +45,16 @@ class VehiculeRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function getAvailableCars(\DateTimeInterface $startDateTime, \DateTimeInterface $endDateTime): array
+    {
+        $query= $this->createQueryBuilder('v')
+            ->leftJoin('v.commandes', 'c')
+            ->andWhere('c.date_heure_depart >= :endDateTime OR c.date_heure_fin <= :startDateTime OR c.id IS NULL')
+            ->setParameter('startDateTime', $startDateTime)
+            ->setParameter('endDateTime', $endDateTime);
+
+        $result=$query->getQuery()->getArrayResult();
+        return $result;
+    }
 }
