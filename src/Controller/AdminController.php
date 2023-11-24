@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Vehicule;
-use App\Form\MembreType;
 use App\Form\VehiculeType;
 use App\Repository\CommandeRepository;
 use App\Repository\MembreRepository;
@@ -14,8 +13,10 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+#[IsGranted('ROLE_ADMIN')]
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
