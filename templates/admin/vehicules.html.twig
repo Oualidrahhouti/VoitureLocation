@@ -9,18 +9,43 @@
     </style>
 
     <div class="example-wrapper">
+        <div class="flex justify-between">
+            <h1 class="align-center">Gestion des commandes</h1>
+            <a href="{{ path('app_add_vehicule') }}">
+                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Ajouter Vehicule</button>
+            </a>
+        </div>
+        <table class="border-separate border border-slate-400 my-5">
+            <tr>
+                <th class="border border-slate-300">id</th>
+                <th class="border border-slate-300">titre</th>
+                <th class="border border-slate-300">modele</th>
+                <th class="border border-slate-300">date enregistrement</th>
+                <th class="border border-slate-300">prix journalier</th>
+                <th class="border border-slate-300">photo</th>
+                <th class="border border-slate-300">actions</th>
+            </tr>
+            <tbody>
         {% for vehicule in vehicules %}
-            <div>
-                {{ vehicule.titre }}
-                {{ vehicule.modele }}
-                <img src="{{asset('images/'~vehicule.photo) }}" width="150">
-                {{ vehicule.prixJournalier }}
-                <form method="post" action={{ path('app_remove_vehicule',{'id':vehicule.id}) }}>
-                    <button type="submit">Supprimer</button>
-                </form>
-            </div>
+            <tr>
+                <td class="border border-slate-300">{{ vehicule.id }}</td>
+                <td class="border border-slate-300">{{ vehicule.titre }}</td>
+                <td class="border border-slate-300">{{ vehicule.modele }}</td>
+                <td class="border border-slate-300">{{ vehicule.dateEnregistrement | date('d-m-Y') }}</td>
+                <td class="border border-slate-300"> {{ vehicule.prixJournalier }}</td>
+                <td class="border border-slate-300"><img src="{{asset('images/'~vehicule.photo) }}" width="150"></td>
+                <td class="border border-slate-300">
+                    <form class="flex" method="post" action={{ path('app_remove_vehicule',{'id':vehicule.id}) }} >
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Modifier
+                        </button>
+                        <button class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded" type="submit">Supprimer</button>
+                    </form>
+                </td>
 
-
+            </tr>
         {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

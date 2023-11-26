@@ -33,8 +33,8 @@
                         {% if is_granted("IS_AUTHENTICATED_FULLY") %}
                             <a href="{{ path('app_membre') }}">profil</a>
                             {% if is_granted("ROLE_ADMIN") %}
-                                <a href="{{ path('app_vehicules') }}">membres</a>
-                                <a href="{{ path('app_membres') }}">vehicules</a>
+                                <a href="{{ path('app_membres') }}">membres</a>
+                                <a href="{{ path('app_vehicules') }}">vehicules</a>
 
                             {% endif %}
                             <a href="{{ path('app_logout') }}">se déconnecter</a>
