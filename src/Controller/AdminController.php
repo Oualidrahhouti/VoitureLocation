@@ -116,7 +116,7 @@ class AdminController extends AbstractController
         return $this->redirectToRoute("app_membres");
     }
 
-    #[Route('/commande/{id}', name: 'app_remove_commande')]
+    #[Route('/commande/{id}', name: 'app_remove_commande',methods: ['POST'])]
     public function RemoveCommande(CommandeRepository $commandeRepository,
         EntityManagerInterface $entityManager,$id): Response
     {
