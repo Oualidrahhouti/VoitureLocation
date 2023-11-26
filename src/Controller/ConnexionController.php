@@ -42,6 +42,7 @@ class ConnexionController extends AbstractController
             $membre->setMdp($passwordHasher->hashPassword($membre,$plainTextPassword));
             $entityManager->persist($membre);
             $entityManager->flush();
+            return $this->redirectToRoute("app_connexion");
         }
         return $this->render('connexion/register.html.twig',[
             'form'=>$registerForm
