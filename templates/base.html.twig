@@ -4,9 +4,22 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            body {
+
+                background-image: url('{{ asset('images/car-rental-wallpaper.jpg') }}');
+                background-size: cover;
+                background-position: center;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
         {% block stylesheets %}
         {% endblock %}
-        <script src="https://cdn.tailwindcss.com"></script>
+
         {% block javascripts %}
         {% endblock %}
     </head>
