@@ -116,4 +116,16 @@ class AdminController extends AbstractController
         return $this->redirectToRoute("app_membres");
     }
 
+    #[Route('/commande/{id}', name: 'app_remove_commande')]
+    public function RemoveCommande(CommandeRepository $commandeRepository,
+        EntityManagerInterface $entityManager,$id): Response
+    {
+        $commande=$commandeRepository->find($id);
+        if($commande) {
+            $entityManager->remove($commande);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute("app_admin");
+    }
+
 }

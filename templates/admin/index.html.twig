@@ -9,18 +9,42 @@
 </style>
 
 <div class="example-wrapper">
-    {{ app.user.email }}
+
+        <h1 class="align-center">Gestion des commandes</h1>
+
+        <table class="border-separate border border-slate-400 my-5">
+                <tr>
+                        <th class="border border-slate-300">id</th>
+                        <th class="border border-slate-300">modele</th>
+                        <th class="border border-slate-300">client</th>
+                        <th class="border border-slate-300">date depart</th>
+                        <th class="border border-slate-300">date fin</th>
+                        <th class="border border-slate-300">prix total</th>
+                        <th class="border border-slate-300">actions</th>
+                </tr>
+                <tbody>
     {% for commande in commandes %}
-        <div>
-            {{ commande.id }}
-            {{ commande.vehicule.modele }}
-            {{ commande.membre.email }}
-            {{ commande.dateHeureDepart | date('d/m/y') }}
-            {{ commande.dateHeureFin | date('d/m/y') }}
-            {{ commande.prixTotal }}
+            <tr>
+                    <td class="border border-slate-300">{{ commande.id }}</td>
+                    <td class="border border-slate-300">{{ commande.vehicule.modele }}</td>
+                    <td class="border border-slate-300">{{ commande.membre.email }}</td>
+                    <td class="border border-slate-300">{{ commande.dateHeureDepart | date('d/m/Y') }}</td>
+                    <td class="border border-slate-300">{{ commande.dateHeureFin | date('d/m/Y') }}</td>
+                    <td class="border border-slate-300">{{ commande.prixTotal ~ ' €' }}</td>
+                    <td class="border border-slate-300">
+                            <form action="{{ path('app_remove_commande',{'id':commande.id}) }}" method="post">
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                            Modifier
+                                    </button>
+                                    <button class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
+                                            Supprimer
+                                    </button>
+                            </form>
+                    </td>
 
-
-        </div>
+            </tr>
     {% endfor %}
+        </tbody>
+        </table>
 </div>
 {% endblock %}

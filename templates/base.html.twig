@@ -31,7 +31,13 @@
                     <h1 class="font-bold text-2xl">Location de voiture</h1>
                     <div class="flex space-x-4 text-gray-900">
                         {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                            <a href="{{ path('app_membre') }}">profil</a>
                             <a href="{{ path('app_logout') }}">se déconnecter</a>
+                            {% if is_granted("ROLE_ADMIN") %}
+                                <a href="{{ path('app_vehicules') }}">membres</a>
+                                <a href="{{ path('app_membres') }}">vehicules</a>
+
+                            {% endif %}
                             {% else %}
                                 <a href="{{ path('app_connexion') }}">se connecter</a>
                         {% endif %}
