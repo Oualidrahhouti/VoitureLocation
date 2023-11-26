@@ -6,7 +6,7 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         <script src="https://cdn.tailwindcss.com"></script>
         <style>
-            body {
+            .body {
 
                 background-image: url('{{ asset('images/car-rental-wallpaper.jpg') }}');
                 background-size: cover;
@@ -23,7 +23,25 @@
         {% block javascripts %}
         {% endblock %}
     </head>
+
     <body>
-        {% block body %}{% endblock %}
+        <nav class="sticky top-0 z-10 bg-white">
+            <div class="max-w-5xl mx-auto px-4">
+                <div class="flex items-center justify-between h-16">
+                    <h1 class="font-bold text-2xl">Location de voiture</h1>
+                    <div class="flex space-x-4 text-gray-900">
+                        {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                            <a href="{{ path('app_logout') }}">se déconnecter</a>
+                            {% else %}
+                                <a href="{{ path('app_connexion') }}">se connecter</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="body">
+            {% block body %}{% endblock %}
+        </div>
+
     </body>
 </html>
