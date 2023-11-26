@@ -8,18 +8,115 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
+<div class="example-wrapper ">
 
-    Hello {{ user.pseudo }}
-    {{ form(profilForm) }}
-    {% for commande in commandes %}
-        <div>
-            {{ commande.id }}
-            {{ commande.vehicule.modele }}
-            {{ commande.dateHeureDepart | date('d/m/y') }}
-            {{ commande.dateHeureFin | date('d/m/y') }}
-            {{ commande.prixTotal }}
+    {{ form_start(profilForm) }}
+    <h2>Hello {{ user.pseudo }}</h2>
+    <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+            {{ form_label(profilForm.prenom, 'Pseudo', {'label_attr': {'class': 'block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'}}) }}
         </div>
-    {% endfor %}
+        <div class="md:w-2/3">
+            {{ form_widget(profilForm.prenom, {'attr': {'class': 'bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}}) }}
+        </div>
+    </div>
+
+    <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+            {{ form_label(profilForm.nom, 'Pseudo', {'label_attr': {'class': 'block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'}}) }}
+        </div>
+        <div class="md:w-2/3">
+            {{ form_widget(profilForm.nom, {'attr': {'class': 'bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}}) }}
+        </div>
+    </div>
+
+    <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+            {{ form_label(profilForm.civilite, 'Pseudo', {'label_attr': {'class': 'block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'}}) }}
+        </div>
+        <div class="md:w-2/3">
+            {{ form_widget(profilForm.civilite, {'attr': {'class': 'bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}}) }}
+        </div>
+    </div>
+
+    <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+            {{ form_label(profilForm.email, 'Email', {'label_attr': {'class': 'block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'}}) }}
+        </div>
+        <div class="md:w-2/3">
+            {{ form_widget(profilForm.email, {'attr': {'class': 'bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}}) }}
+        </div>
+    </div>
+
+    <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+            {{ form_label(profilForm.pseudo, 'Pseudo', {'label_attr': {'class': 'block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'}}) }}
+        </div>
+        <div class="md:w-2/3">
+            {{ form_widget(profilForm.pseudo, {'attr': {'class': 'bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}}) }}
+        </div>
+    </div>
+
+    <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+            {{ form_label(profilForm.mdp.first, 'Mot de passe', {'label_attr': {'class': 'block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'}}) }}
+        </div>
+        <div class="md:w-2/3">
+            {{ form_widget(profilForm.mdp.first, {'attr': {'class': 'bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}}) }}
+        </div>
+    </div>
+
+    <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+            {{ form_label(profilForm.mdp.second, 'Confirmer mot de passe', {'label_attr': {'class': 'block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'}}) }}
+        </div>
+        <div class="md:w-2/3">
+            {{ form_widget(profilForm.mdp.second, {'attr': {'class': 'bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500'}}) }}
+        </div>
+    </div>
+
+    <div class="md:flex md:items-center flex items-center justify-between">
+        <div class="md:w-1/3"></div>
+        <div class="md:w-2/3">
+            {{ form_widget(profilForm.Valider, {'attr': {'class': 'shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'}}) }}
+        </div>
+    </div>
+
+    {{ form_end(profilForm) }}
+
+
+    <h1> mes commandes</h1>
+    <table class="border-separate border border-slate-400 my-5">
+        <tr>
+            <th class="border border-slate-300">id</th>
+            <th class="border border-slate-300">modele</th>
+            <th class="border border-slate-300">date depart</th>
+            <th class="border border-slate-300">date fin</th>
+            <th class="border border-slate-300">prix total</th>
+            <th class="border border-slate-300">actions</th>
+        </tr>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td class="border border-slate-300">{{ commande.id }}</td>
+                <td class="border border-slate-300">{{ commande.vehicule.modele }}</td>
+                <td class="border border-slate-300">{{ commande.dateHeureDepart | date('d/m/Y') }}</td>
+                <td class="border border-slate-300">{{ commande.dateHeureFin | date('d/m/Y') }}</td>
+                <td class="border border-slate-300">{{ commande.prixTotal ~ ' €' }}</td>
+                <td class="border border-slate-300 flex">
+                    <form action="{{ path('app_remove_commande',{'id':commande.id}) }}" method="post">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Modifier
+                        </button>
+                        <button class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
+                            Supprimer
+                        </button>
+                    </form>
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
